@@ -1,1 +1,1 @@
-# vortex
+Vortex Platform CLI.
