@@ -7,6 +7,7 @@ import (
 	"os"
 
 	"github.com/nightblue-io/vortex-go/iam/v1"
+	"github.com/nightblue-io/vortex/params"
 	"github.com/nightblue-io/vortex/pkg/conn"
 	"github.com/spf13/cobra"
 )
@@ -30,13 +31,17 @@ func WhoAmICmd() *cobra.Command {
 			}
 
 			ctx := context.Background()
-			mycon, err := conn.GetConnection(ctx, "iam")
+			gcon, err := conn.GetConnection(ctx, &conn.GetConnectionOptions{
+				Target:      params.Addr,
+				ServiceName: "iam",
+			})
+
 			if err != nil {
 				fnerr(err)
 				return
 			}
 
-			client, err := iam.NewClient(ctx, &iam.ClientOptions{Conn: mycon})
+			client, err := iam.NewClient(ctx, &iam.ClientOptions{Conn: gcon})
 			if err != nil {
 				fnerr(err)
 				return

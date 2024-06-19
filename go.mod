@@ -4,7 +4,7 @@ go 1.22.4
 
 require (
 	github.com/fatih/color v1.17.0
-	github.com/nightblue-io/vortex-go v0.1.0
+	github.com/nightblue-io/vortex-go v0.1.1
 	github.com/spf13/cobra v1.8.1
 )
 

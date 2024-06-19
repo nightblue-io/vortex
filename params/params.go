@@ -1,6 +1,8 @@
 package params
 
 var (
+	Addr string
+
 	Version string
 
 	AuthProfile  string

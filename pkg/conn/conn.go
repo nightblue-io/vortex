@@ -6,6 +6,20 @@ import (
 	sdkcon "github.com/nightblue-io/vortex-go/conn"
 )
 
-func GetConnection(ctx context.Context, svcname string) (*sdkcon.GrpcClientConn, error) {
-	return sdkcon.New(ctx, sdkcon.WithTargetService(svcname))
+type GetConnectionOptions struct {
+	Target      string
+	ServiceName string
+}
+
+func GetConnection(ctx context.Context, opt *GetConnectionOptions) (*sdkcon.GrpcClientConn, error) {
+	opts := []sdkcon.ClientOption{}
+	if opt.Target != "" {
+		opts = append(opts, sdkcon.WithTarget(opt.Target))
+	}
+
+	if opt.ServiceName != "" {
+		opts = append(opts, sdkcon.WithTargetService(opt.ServiceName))
+	}
+
+	return sdkcon.New(ctx, opts...)
 }
