@@ -52,7 +52,9 @@ func init() {
 	rootCmd.PersistentFlags().StringVar(&params.OutFmt, "outfmt", "csv", "output format: json, csv, valid if --out is set")
 	rootCmd.PersistentFlags().BoolVar(&params.CleanOut, "bare", params.CleanOut, "if true, set console output to barebones, easier for scripting")
 	rootCmd.AddCommand(
+		cmds.DoCmd(),
 		cmds.WhoAmICmd(),
+		cmds.LoginCmd(),
 	)
 }
 
