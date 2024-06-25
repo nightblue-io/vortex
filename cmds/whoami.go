@@ -3,10 +3,12 @@ package cmds
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"log/slog"
 	"os"
 
 	"github.com/nightblue-io/vortex-go/iam/v1"
+	"github.com/nightblue-io/vortex/internal"
 	"github.com/nightblue-io/vortex/internal/conn"
 	"github.com/nightblue-io/vortex/params"
 	"github.com/spf13/cobra"
@@ -48,14 +50,15 @@ func WhoAmICmd() *cobra.Command {
 			}
 
 			defer client.Close()
-			resp, err := client.WhoAmI(ctx, &iam.WhoAmIRequest{})
+			token := internal.GetLocalAccessToken()
+			resp, err := client.WhoAmI(ctx, &iam.WhoAmIRequest{AccessToken: token})
 			if err != nil {
 				fnerr(err)
 				return
 			}
 
 			b, _ := json.Marshal(resp)
-			slog.Info(string(b))
+			fmt.Println(string(b))
 		},
 	}
 
