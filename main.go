@@ -45,12 +45,8 @@ func init() {
 	rootCmd.Flags().SortFlags = false
 	rootCmd.PersistentFlags().SortFlags = false
 	rootCmd.PersistentFlags().StringVar(&params.Addr, "addr", params.Addr, "target service address")
-	rootCmd.PersistentFlags().StringVar(&params.AuthProfile, "profile", params.AuthProfile, "profile name in ~/.config/nightblue/config.toml, default is [default]")
-	rootCmd.PersistentFlags().StringVar(&params.ClientId, "client-id", os.Getenv("NIGHTBLUE_CLIENT_ID"), "your client id, defaults to $NIGHTBLUE_CLIENT_ID")
-	rootCmd.PersistentFlags().StringVar(&params.ClientSecret, "client-secret", os.Getenv("NIGHTBLUE_CLIENT_SECRET"), "your client secret, defaults to $NIGHTBLUE_CLIENT_SECRET")
 	rootCmd.PersistentFlags().StringVar(&params.OutFile, "out", params.OutFile, "output file, if the command supports writing to file")
 	rootCmd.PersistentFlags().StringVar(&params.OutFmt, "outfmt", "csv", "output format: json, csv, valid if --out is set")
-	rootCmd.PersistentFlags().BoolVar(&params.CleanOut, "bare", params.CleanOut, "if true, set console output to barebones, easier for scripting")
 	rootCmd.AddCommand(
 		cmds.DoCmd(),
 		cmds.WhoAmICmd(),
